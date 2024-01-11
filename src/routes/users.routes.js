@@ -3,6 +3,8 @@ const AppError = require("../utils/AppError");
 
 const useRouter = Router()
 
+// Middleware is used to perform a check before calling the desired function on the Controller.
+
 function myMiddleware(request, response, next) {
 
     const { name } = request.body

@@ -1,5 +1,7 @@
 const { Router } = require('express');
 
+// Connection to routes
+
 const userRoutes = require("./users.routes")
 const noteRoutes = require("./notes.routes")
 const tagsRouter = require("./tags.routes")
