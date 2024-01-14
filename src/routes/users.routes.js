@@ -1,26 +1,15 @@
 const { Router } = require("express");
-const AppError = require("../utils/AppError");
 
 const useRouter = Router()
 
-// Middleware is used to perform a check before calling the desired function on the Controller.
-
-function myMiddleware(request, response, next) {
-
-    const { name } = request.body
-
-    if(!name){
-        throw new AppError("O nome é obrigatório.")
-    }
-
-    next()
-}
+require("../middlewares/ensureAuthenticated")
+const ensureAuthenticated = require("../middlewares/ensureAuthenticated")
 
 const UserController = require("../controllers/UserController");
 
 const userController = new UserController()
 
-useRouter.post('/', myMiddleware, userController.createUser) 
-useRouter.put('/:id', userController.update)
+useRouter.post('/', userController.createUser) 
+useRouter.put('/', ensureAuthenticated, userController.update)
 
 module.exports = useRouter
